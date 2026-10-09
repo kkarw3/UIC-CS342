@@ -1,0 +1,27 @@
+.root {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.home-panel,
+.content-panel,
+.header-panel,
+.button-bar {
+    -fx-padding: 20px;
+}
+
+.refresh-button {
+    -fx-font-weight: bold;
+}
+
+.status-label {
+    -fx-padding: 8px;
+}
+
+/* TODO: Students should expand the stylesheet.
+   Possible classes: .city-card, .cold, .mild, .warm, .hot */
