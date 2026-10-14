@@ -17,12 +17,14 @@ import java.util.regex.Pattern;
  */
 public class WeatherService {
     private static final Pattern TEMPERATURE_PATTERN =
-            Pattern.compile("\\\"temperature_2m\\\":\\s*([0-9.-]+)");
+            Pattern.compile("\"temperature_2m\":\\s*([0-9.-]+)");
 
     private final List<TargetLocation> locations = List.of(
             new TargetLocation("Chicago", "41.85", "-87.65"),
             new TargetLocation("Los Angeles", "34.05", "-118.24"),
-            new TargetLocation("New York", "40.71", "-74.01")
+            new TargetLocation("New York", "40.71", "-74.01"),
+            new TargetLocation("Houston", "29.76", "-95.36"),
+            new TargetLocation("Phoenix", "33.44", "112.07")
     );
 
     public List<TargetLocation> getLocations() {

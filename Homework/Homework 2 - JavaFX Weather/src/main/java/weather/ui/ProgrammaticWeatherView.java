@@ -35,6 +35,7 @@ public class ProgrammaticWeatherView extends BorderPane
     public ProgrammaticWeatherView(WeatherService weatherService)
     {
         this.weatherService = weatherService;
+        this.setId("main-pane");
 
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("City");
@@ -42,9 +43,9 @@ public class ProgrammaticWeatherView extends BorderPane
         yAxis.setLabel("Temperature (ºF)");
 
         temperatureChart = new BarChart<>(xAxis, yAxis);
+        temperatureChart.setTitle("City Temperature Comparison");
         temperatureChart.setLegendVisible(false);
         temperatureChart.setAnimated(false);
-        temperatureChart.setTitle("City Temperature Comparison");
         chartDataSeries = new XYChart.Series<>();
         temperatureChart.getData().add(chartDataSeries);
 
@@ -57,9 +58,10 @@ public class ProgrammaticWeatherView extends BorderPane
     {
         setPadding(new Insets(15));
         Label titleLabel = new Label("The Weather Channel");
-        titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        titleLabel.getStyleClass().add("title-label");
 
         Button refreshButton = new Button("Refresh");
+        refreshButton.getStyleClass().add("action-button");
         refreshButton.setOnAction(e -> refreshData());
 
         HBox topBar = new HBox(15, titleLabel, refreshButton);
@@ -71,7 +73,7 @@ public class ProgrammaticWeatherView extends BorderPane
         cardsContainer.setAlignment(Pos.TOP_LEFT);
         cardsContainer.setMinWidth(250);
 
-        List<String> cities = List.of("New York", "Los Angeles", "Chicago");
+        List<String> cities = List.of("New York", "Los Angeles", "Chicago", "Houston", "Phoenix");
         for (String city : cities)
         {
             CityUICard card = new CityUICard(city);
@@ -107,26 +109,25 @@ public class ProgrammaticWeatherView extends BorderPane
             super(10);
             setPadding(new Insets(12));
             setAlignment(Pos.CENTER_LEFT);
+            getStyleClass().add("city-card");
 
             nameLabel = new Label(cityName);
-            nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+            nameLabel.getStyleClass().add("city-name");
 
             temperatureLabel = new Label("-- °F");
-            temperatureLabel.setStyle("-fx-font-size: 14px;");
+            temperatureLabel.getStyleClass().add("city-temperature");
 
             temperatureGauge = new ProgressBar(0.0);
             temperatureGauge.setPrefWidth(200);
 
             HBox textData = new HBox(15, nameLabel, temperatureLabel);
             getChildren().addAll(textData, temperatureGauge);
-            setHighlighted(false);
         }
 
         // Updates the temperature of the current city
         public void updateTemperature(double temp)
         {
             temperatureLabel.setText(String.format("%.1f °F", temp));
-
             double progress = Math.max(0.0, Math.min(1.0, temp / 100.0));
             temperatureGauge.setProgress(progress);
         }
@@ -136,11 +137,14 @@ public class ProgrammaticWeatherView extends BorderPane
         {
             if (highlighted)
             {
-                setStyle("-fx-background-color: #e0f7fa; -fx-border-color: #00796b; " + "-fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px;");
+                if (!getStyleClass().contains("highlighted-card"))
+                {
+                    getStyleClass().add("highlighted-card");
+                }
             }
             else
             {
-                setStyle("-fx-background-color: #f5f5f5; -fx-border-color: #cccccc; " + "-fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px;");
+                getStyleClass().remove("highlighted-card");
             }
         }
     }
@@ -159,7 +163,7 @@ public class ProgrammaticWeatherView extends BorderPane
                 String cityName = reading.location().city();
                 double temperature = reading.temperatureF();
 
-                CityUICard card = cityUICards.get(reading.location().city());
+                CityUICard card = cityUICards.get(cityName);
                 if (card != null)
                 {
                     card.updateTemperature(temperature);
@@ -174,7 +178,6 @@ public class ProgrammaticWeatherView extends BorderPane
                     }
                 }
             }
-
             statusLabel.setText("Weather updated successfully.");
         }
         catch (WeatherService.WeatherRetrievalException e)

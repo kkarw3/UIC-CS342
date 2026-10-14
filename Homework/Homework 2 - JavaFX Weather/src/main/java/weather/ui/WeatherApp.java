@@ -36,10 +36,13 @@ public class WeatherApp extends Application
         controller.setWeatherService(weatherService);
 
         Label navigationLabel = new Label("Switch Interface:");
-        navigationLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: white;");
+        navigationLabel.getStyleClass().add("navigation-label");
 
         Button buttonProgrammatic = new Button("Programmatic Dashboard");
         Button buttonFXML = new Button("FXML Dashboard");
+
+        buttonProgrammatic.getStyleClass().add("action-button");
+        buttonFXML.getStyleClass().add("action-button");
         
         buttonProgrammatic.setOnAction(e -> mainLayout.setCenter(programmaticWeatherView));
         buttonFXML.setOnAction(e -> mainLayout.setCenter(fxmlWeatherView));
@@ -47,13 +50,23 @@ public class WeatherApp extends Application
         HBox navigationBar = new HBox(15, navigationLabel, buttonProgrammatic, buttonFXML);
         navigationBar.setAlignment(Pos.CENTER);
         navigationBar.setPadding(new Insets(10));
-        navigationBar.setStyle("-fx-background-color: #2c3e50;");
+        navigationBar.getStyleClass().add("navigation-bar");
 
         mainLayout = new BorderPane();
         mainLayout.setTop(navigationBar);
         mainLayout.setCenter(programmaticWeatherView);
 
         Scene scene = new Scene(mainLayout, 850, 550);
+
+        URL cssResource = getClass().getResource("/weather/weather.css");
+        if (cssResource != null)
+        {
+            scene.getStylesheets().add(cssResource.toExternalForm());
+        }
+        else
+        {
+            System.err.println("Warning: /weather/weather.css not found. Dashboard will load unstyled.");
+        }
 
         mainStage.setTitle("Weather Dashboard");
         mainStage.setScene(scene);

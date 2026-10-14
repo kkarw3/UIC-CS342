@@ -20,41 +20,55 @@
     <top>
         <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
             <padding><Insets bottom="15"/></padding>
-            <Label text="Weather Dashboard (FXML View)" styleClass="title-label" />
-            <Button text="Refresh Weather" onAction="#handleRefresh" styleClass="action-button"/>
+            <Label text="The Weather Channel" styleClass="title-label" />
+            <Button text="Refresh" onAction="#handleRefresh" styleClass="action-button"/>
         </HBox>
     </top>
 
     <center>
         <HBox spacing="20">
-            <!-- Left side: City Cards -->
             <VBox alignment="TOP_LEFT" spacing="10" minWidth="250">
-                <VBox fx:id="chicagoUICard" styleClass="city-card">
+                <VBox fx:id="newYorkCityUICard" styleClass="city-card">
                     <HBox spacing="15" alignment="CENTER_LEFT">
-                        <Label text="Chicago" styleClass="city-name"/>
-                        <Label fx:id="chicagoTemperatureLabel" text="-- °F" styleClass="city-temp"/>
+                        <Label text="New York" styleClass="city-name"/>
+                        <Label fx:id="newYorkCityTemperatureLabel" text="-- °F" styleClass="city-temperature"/>
                     </HBox>
-                    <ProgressBar fx:id="chicagoProgressBar" prefWidth="200" progress="0.0"/>
+                    <ProgressBar fx:id="newYorkCityProgressBar" prefWidth="200" progress="0.0"/>
                 </VBox>
 
                 <VBox fx:id="losAngelesUICard" styleClass="city-card">
                     <HBox spacing="15" alignment="CENTER_LEFT">
                         <Label text="Los Angeles" styleClass="city-name"/>
-                        <Label fx:id="losAngelesTemperatureLabel" text="-- °F" styleClass="city-temp"/>
+                        <Label fx:id="losAngelesTemperatureLabel" text="-- °F" styleClass="city-temperature"/>
                     </HBox>
                     <ProgressBar fx:id="losAngelesProgressBar" prefWidth="200" progress="0.0"/>
                 </VBox>
 
-                <VBox fx:id="newYorkCityUICard" styleClass="city-card">
+                <VBox fx:id="chicagoUICard" styleClass="city-card">
                     <HBox spacing="15" alignment="CENTER_LEFT">
-                        <Label text="New York" styleClass="city-name"/>
-                        <Label fx:id="newYorkCityTemperatureLabel" text="-- °F" styleClass="city-temp"/>
+                        <Label text="Chicago" styleClass="city-name"/>
+                        <Label fx:id="chicagoTemperatureLabel" text="-- °F" styleClass="city-temperature"/>
                     </HBox>
-                    <ProgressBar fx:id="newYorkCityProgressBar" prefWidth="200" progress="0.0"/>
+                    <ProgressBar fx:id="chicagoProgressBar" prefWidth="200" progress="0.0"/>
+                </VBox>
+
+                <VBox fx:id="houstonUICard" styleClass="city-card">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="Houston" styleClass="city-name"/>
+                        <Label fx:id="houstonTemperatureLabel" text="-- °F" styleClass="city-temperature"/>
+                    </HBox>
+                    <ProgressBar fx:id="houstonProgressBar" prefWidth="200" progress="0.0"/>
+                </VBox>
+
+                <VBox fx:id="phoenixUICard" styleClass="city-card">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="Phoenix" styleClass="city-name"/>
+                        <Label fx:id="phoenixTemperatureLabel" text="-- °F" styleClass="city-temperature"/>
+                    </HBox>
+                    <ProgressBar fx:id="phoenixProgressBar" prefWidth="200" progress="0.0"/>
                 </VBox>
             </VBox>
 
-            <!-- Right side: Bar Chart -->
             <BarChart fx:id="temperatureChart" title="City Temperature Comparison" animated="false" legendVisible="false" HBox.hgrow="ALWAYS">
                 <xAxis>
                     <CategoryAxis label="City"/>
@@ -69,13 +83,15 @@
     <bottom>
         <HBox alignment="CENTER_LEFT" spacing="15">
             <padding><Insets top="15"/></padding>
-            <Label text="Active City:" />
-            <ComboBox fx:id="citySelector" promptText="Select City to Highlight" onAction="#handleCitySelection">
+            <Label text="Current city:" />
+            <ComboBox fx:id="citySelector" promptText="Select a city to Highlight" onAction="#handleCitySelection">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Chicago"/>
-                        <String fx:value="Los Angeles"/>
                         <String fx:value="New York"/>
+                        <String fx:value="Los Angeles"/>
+                        <String fx:value="Chicago"/>
+                        <String fx:value="Houston"/>
+                        <String fx:value="Phoenix"/>
                     </FXCollections>
                 </items>
             </ComboBox>

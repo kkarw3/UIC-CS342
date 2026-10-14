@@ -17,17 +17,25 @@ import weather.service.WeatherService;
 /** Controller for weather-view.fxml. */
 public class WeatherController
 {
-    @FXML private VBox chicagoUICard;
-    @FXML private Label chicagoTemperatureLabel;
-    @FXML private ProgressBar chicagoProgressBar;
+    @FXML private VBox newYorkCityUICard;
+    @FXML private Label newYorkCityTemperatureLabel;
+    @FXML private ProgressBar newYorkCityProgressBar;
 
     @FXML private VBox losAngelesUICard;
     @FXML private Label losAngelesTemperatureLabel;
     @FXML private ProgressBar losAngelesProgressBar;
 
-    @FXML private VBox newYorkCityUICard;
-    @FXML private Label newYorkCityTemperatureLabel;
-    @FXML private ProgressBar newYorkCityProgressBar;
+    @FXML private VBox chicagoUICard;
+    @FXML private Label chicagoTemperatureLabel;
+    @FXML private ProgressBar chicagoProgressBar;
+
+    @FXML private VBox houstonUICard;
+    @FXML private Label houstonTemperatureLabel;
+    @FXML private ProgressBar houstonProgressBar;
+
+    @FXML private VBox phoenixUICard;
+    @FXML private Label phoenixTemperatureLabel;
+    @FXML private ProgressBar phoenixProgressBar;
 
     @FXML private BarChart<String, Number> temperatureChart;
     private XYChart.Series<String, Number> chartDataSeries;
@@ -41,9 +49,11 @@ public class WeatherController
     private void initialize()
     {
         chartDataSeries = new XYChart.Series<>();
-        chartDataSeries.getData().add(new XYChart.Data<>("Chicago", 0));
-        chartDataSeries.getData().add(new XYChart.Data<>("Los Angeles", 0));
         chartDataSeries.getData().add(new XYChart.Data<>("New York", 0));
+        chartDataSeries.getData().add(new XYChart.Data<>("Los Angeles", 0));
+        chartDataSeries.getData().add(new XYChart.Data<>("Chicago", 0));
+        chartDataSeries.getData().add(new XYChart.Data<>("Houston", 0));
+        chartDataSeries.getData().add(new XYChart.Data<>("Phoenix", 0));
         temperatureChart.getData().add(chartDataSeries);
     }
 
@@ -72,20 +82,33 @@ public class WeatherController
 
                 double progress = Math.max(0.0, Math.min(1.0, temperature / 100.0));
 
-                if (city.equals("Chicago"))
+                switch (city)
                 {
-                    chicagoTemperatureLabel.setText(formattedTemperature);
-                    chicagoProgressBar.setProgress(progress);
-                }
-                else if (city.equals("Los Angeles"))
-                {
-                    losAngelesTemperatureLabel.setText(formattedTemperature);
-                    losAngelesProgressBar.setProgress(progress);
-                }
-                else if (city.equals("New York"))
-                {
-                    newYorkCityTemperatureLabel.setText(formattedTemperature);
-                    newYorkCityProgressBar.setProgress(progress);
+                    case "Chicago" ->
+                    {
+                        chicagoTemperatureLabel.setText(formattedTemperature);
+                        chicagoProgressBar.setProgress(progress);
+                    }
+                    case "Los Angeles" ->
+                    {
+                        losAngelesTemperatureLabel.setText(formattedTemperature);
+                        losAngelesProgressBar.setProgress(progress);
+                    }
+                    case "New York" ->
+                    {
+                        newYorkCityTemperatureLabel.setText(formattedTemperature);
+                        newYorkCityProgressBar.setProgress(progress);
+                    }
+                    case "Houston" ->
+                    {
+                        houstonTemperatureLabel.setText(formattedTemperature);
+                        houstonProgressBar.setProgress(progress);
+                    }
+                    case "Phoenix" ->
+                    {
+                        phoenixTemperatureLabel.setText(formattedTemperature);
+                        phoenixProgressBar.setProgress(progress);
+                    }
                 }
 
                 for (XYChart.Data<String, Number> data : chartDataSeries.getData())
@@ -120,6 +143,8 @@ public class WeatherController
         chicagoUICard.getStyleClass().remove("highlighted-card");
         losAngelesUICard.getStyleClass().remove("highlighted-card");
         newYorkCityUICard.getStyleClass().remove("highlighted-card");
+        houstonUICard.getStyleClass().remove("highlighted-card");
+        phoenixUICard.getStyleClass().remove("highlighted-card");
 
         // Highlights the selected city
         if ("Chicago".equals(selectedCity))
@@ -134,6 +159,15 @@ public class WeatherController
         {
             newYorkCityUICard.getStyleClass().add("highlighted-card");
         }
+        else if ("Houston".equals(selectedCity))
+        {
+            houstonUICard.getStyleClass().add("highlighted-card");
+        }
+        else if ("Phoenix".equals(selectedCity))
+        {
+            phoenixUICard.getStyleClass().add("highlighted-card");
+        }
+
     }
 
     // Handles errors
