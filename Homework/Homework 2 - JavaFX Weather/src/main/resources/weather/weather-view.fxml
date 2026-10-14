@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -11,45 +15,60 @@
 <?import java.lang.String?>
 
 <BorderPane id="main-pane" stylesheets="@weather.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="weather.controller.WeatherController">
-
-    <padding>
-        <Insets top="15" right="15" bottom="15" left="15"/>
-    </padding>
+    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
-            <padding>
-                <Insets bottom="15"/>
-            </padding>
+            <padding><Insets bottom="15"/></padding>
             <Label text="Weather Dashboard (FXML View)" styleClass="title-label" />
             <Button text="Refresh Weather" onAction="#handleRefresh" styleClass="action-button"/>
         </HBox>
     </top>
 
     <center>
-        <VBox alignment="TOP_CENTER" spacing="10">
-            <HBox fx:id="chicagoUICard" styleClass="city-card">
-                <Label text="Chicago" styleClass="city-name"/>
-                <Label fx:id="chicagoTemperatureLabel" text="-- °F" styleClass="city-temp"/>
-            </HBox>
+        <HBox spacing="20">
+            <!-- Left side: City Cards -->
+            <VBox alignment="TOP_LEFT" spacing="10" minWidth="250">
+                <VBox fx:id="chicagoUICard" styleClass="city-card">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="Chicago" styleClass="city-name"/>
+                        <Label fx:id="chicagoTemperatureLabel" text="-- °F" styleClass="city-temp"/>
+                    </HBox>
+                    <ProgressBar fx:id="chicagoProgressBar" prefWidth="200" progress="0.0"/>
+                </VBox>
 
-            <HBox fx:id="losAngelesUICard" styleClass="city-card">
-                <Label text="Los Angeles" styleClass="city-name"/>
-                <Label fx:id="losAngelesTemperatureLabel" text="-- °F" styleClass="city-temp"/>
-            </HBox>
+                <VBox fx:id="losAngelesUICard" styleClass="city-card">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="Los Angeles" styleClass="city-name"/>
+                        <Label fx:id="losAngelesTemperatureLabel" text="-- °F" styleClass="city-temp"/>
+                    </HBox>
+                    <ProgressBar fx:id="losAngelesProgressBar" prefWidth="200" progress="0.0"/>
+                </VBox>
 
-            <HBox fx:id="newYorkCityUICard" styleClass="city-card">
-                <Label text="New York" styleClass="city-name"/>
-                <Label fx:id="newYorkCityTemperatureLabel" text="-- °F" styleClass="city-temp"/>
-            </HBox>
-        </VBox>
+                <VBox fx:id="newYorkCityUICard" styleClass="city-card">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="New York" styleClass="city-name"/>
+                        <Label fx:id="newYorkCityTemperatureLabel" text="-- °F" styleClass="city-temp"/>
+                    </HBox>
+                    <ProgressBar fx:id="newYorkCityProgressBar" prefWidth="200" progress="0.0"/>
+                </VBox>
+            </VBox>
+
+            <!-- Right side: Bar Chart -->
+            <BarChart fx:id="temperatureChart" title="City Temperature Comparison" animated="false" legendVisible="false" HBox.hgrow="ALWAYS">
+                <xAxis>
+                    <CategoryAxis label="City"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Temperature (°F)"/>
+                </yAxis>
+            </BarChart>
+        </HBox>
     </center>
 
     <bottom>
         <HBox alignment="CENTER_LEFT" spacing="15">
-            <padding>
-                <Insets top="15"/>
-            </padding>
+            <padding><Insets top="15"/></padding>
             <Label text="Active City:" />
             <ComboBox fx:id="citySelector" promptText="Select City to Highlight" onAction="#handleCitySelection">
                 <items>

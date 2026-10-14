@@ -6,14 +6,18 @@ import java.util.Map;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert;
-import weather.model.TargetLocation;
 import weather.model.WeatherReading;
 import weather.service.WeatherService;
 
@@ -25,9 +29,25 @@ public class ProgrammaticWeatherView extends BorderPane
     private final ComboBox<String> citySelector = new ComboBox<>();
     private final Label statusLabel = new Label("Status: Ready");
 
+    private final BarChart<String, Number> temperatureChart;
+    private final XYChart.Series<String, Number> chartDataSeries;
+
     public ProgrammaticWeatherView(WeatherService weatherService)
     {
         this.weatherService = weatherService;
+
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("City");
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Temperature (ºF)");
+
+        temperatureChart = new BarChart<>(xAxis, yAxis);
+        temperatureChart.setLegendVisible(false);
+        temperatureChart.setAnimated(false);
+        temperatureChart.setTitle("City Temperature Comparison");
+        chartDataSeries = new XYChart.Series<>();
+        temperatureChart.getData().add(chartDataSeries);
+
         initializeUI();
         refreshData();
     }
@@ -35,10 +55,11 @@ public class ProgrammaticWeatherView extends BorderPane
     // Sets up the UI for "The Weather Channel"
     private void initializeUI()
     {
+        setPadding(new Insets(15));
         Label titleLabel = new Label("The Weather Channel");
         titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
-        Button refreshButton = new Button("Refresh Weather");
+        Button refreshButton = new Button("Refresh");
         refreshButton.setOnAction(e -> refreshData());
 
         HBox topBar = new HBox(15, titleLabel, refreshButton);
@@ -47,7 +68,8 @@ public class ProgrammaticWeatherView extends BorderPane
         setTop(topBar);
 
         VBox cardsContainer = new VBox(10);
-        cardsContainer.setAlignment(Pos.TOP_CENTER);
+        cardsContainer.setAlignment(Pos.TOP_LEFT);
+        cardsContainer.setMinWidth(250);
 
         List<String> cities = List.of("New York", "Los Angeles", "Chicago");
         for (String city : cities)
@@ -55,11 +77,15 @@ public class ProgrammaticWeatherView extends BorderPane
             CityUICard card = new CityUICard(city);
             cityUICards.put(city, card);
             cardsContainer.getChildren().add(card);
+
+            chartDataSeries.getData().add(new XYChart.Data<>(city, 0));
         }
-        setCenter(cardsContainer);
+
+        setLeft(cardsContainer);
+        setCenter(temperatureChart);
 
         citySelector.getItems().addAll(cities);
-        citySelector.setPromptText("Select City to Highlight");
+        citySelector.setPromptText("Select a city to Highlight");
         citySelector.setOnAction(e -> handleCitySelection());
 
         HBox bottomBar = new HBox(15, new Label("Current city:"), citySelector, statusLabel);
@@ -73,11 +99,12 @@ public class ProgrammaticWeatherView extends BorderPane
     {
         private final Label nameLabel;
         private final Label temperatureLabel;
+        private final ProgressBar temperatureGauge;
 
         // The actual UI element for each city
         public CityUICard(String cityName)
         {
-            super(20);
+            super(10);
             setPadding(new Insets(12));
             setAlignment(Pos.CENTER_LEFT);
 
@@ -87,6 +114,10 @@ public class ProgrammaticWeatherView extends BorderPane
             temperatureLabel = new Label("-- °F");
             temperatureLabel.setStyle("-fx-font-size: 14px;");
 
+            temperatureGauge = new ProgressBar(0.0);
+            temperatureGauge.setPrefWidth(200);
+
+            HBox textData = new HBox(15, nameLabel, temperatureLabel, temperatureLabel);
             getChildren().addAll(nameLabel, temperatureLabel);
             setHighlighted(false);
         }
@@ -95,6 +126,9 @@ public class ProgrammaticWeatherView extends BorderPane
         public void updateTemperature(double temp)
         {
             temperatureLabel.setText(String.format("%.1f °F", temp));
+
+            double progress = Math.max(0.0, Math.min(1.0, temp / 100.0));
+            temperatureGauge.setProgress(progress);
         }
 
         // Highlights the current city in the UI
@@ -116,20 +150,28 @@ public class ProgrammaticWeatherView extends BorderPane
     public void refreshData()
     {
         statusLabel.setText("Retrieving Weather...");
-
         try
         {
             List<WeatherReading> weatherReadings = weatherService.getCurrentWeather();
 
             for (WeatherReading reading : weatherReadings)
             {
-                // Get the city name from the reading and find the matching UI card
-                CityUICard card = cityUICards.get(reading.location().city());
+                String cityName = reading.location().city();
+                double temperature = reading.temperatureF();
 
+                CityUICard card = cityUICards.get(reading.location().city());
                 if (card != null)
                 {
-                    // Update the card's temperature
-                    card.updateTemperature(reading.temperatureF());
+                    card.updateTemperature(temperature);
+                }
+
+                for (XYChart.Data<String, Number> data : chartDataSeries.getData())
+                {
+                    if (data.getXValue().equals(cityName))
+                    {
+                        data.setYValue(temperature);
+                        break;
+                    }
                 }
             }
 

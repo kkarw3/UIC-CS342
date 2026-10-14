@@ -3,24 +3,34 @@ package weather.controller;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.VBox;
 import weather.model.WeatherReading;
 import weather.service.WeatherService;
+
 
 /** Controller for weather-view.fxml. */
 public class WeatherController
 {
-    @FXML private HBox chicagoUICard;
+    @FXML private VBox chicagoUICard;
     @FXML private Label chicagoTemperatureLabel;
+    @FXML private ProgressBar chicagoProgressBar;
 
-    @FXML private HBox losAngelesUICard;
+    @FXML private VBox losAngelesUICard;
     @FXML private Label losAngelesTemperatureLabel;
+    @FXML private ProgressBar losAngelesProgressBar;
 
-    @FXML private HBox newYorkCityUICard;
+    @FXML private VBox newYorkCityUICard;
     @FXML private Label newYorkCityTemperatureLabel;
+    @FXML private ProgressBar newYorkCityProgressBar;
+
+    @FXML private BarChart<String, Number> temperatureChart;
+    private XYChart.Series<String, Number> chartDataSeries;
 
     @FXML private ComboBox<String> citySelector;
     @FXML private Label statusLabel;
@@ -30,9 +40,11 @@ public class WeatherController
     @FXML
     private void initialize()
     {
-        chicagoUICard.getStyleClass().add("city-card");
-        losAngelesUICard.getStyleClass().add("city-card");
-        newYorkCityUICard.getStyleClass().add("city-card");
+        chartDataSeries = new XYChart.Series<>();
+        chartDataSeries.getData().add(new XYChart.Data<>("Chicago", 0));
+        chartDataSeries.getData().add(new XYChart.Data<>("Los Angeles", 0));
+        chartDataSeries.getData().add(new XYChart.Data<>("New York", 0));
+        temperatureChart.getData().add(chartDataSeries);
     }
 
     // Injects the shared app layer into the controller
@@ -42,11 +54,11 @@ public class WeatherController
         handleRefresh();
     }
 
-    /** Named FXML event-handler requirement. */
     @FXML
     private void handleRefresh()
     {
         if (weatherService == null) { return; }
+        statusLabel.setText("Retrieving Weather Data...");
 
         try
         {
@@ -55,19 +67,34 @@ public class WeatherController
             for (WeatherReading reading : weatherReadings)
             {
                 String city = reading.location().city();
+                double temperature = reading.temperatureF();
                 String formattedTemperature = String.format("%.1f °F", reading.temperatureF());
 
-                if (city.equals("Chicago") && chicagoTemperatureLabel != null)
+                double progress = Math.max(0.0, Math.min(1.0, temperature / 100.0));
+
+                if (city.equals("Chicago"))
                 {
                     chicagoTemperatureLabel.setText(formattedTemperature);
+                    chicagoProgressBar.setProgress(progress);
                 }
-                else if (city.equals("Los Angeles") && losAngelesTemperatureLabel != null)
+                else if (city.equals("Los Angeles"))
                 {
                     losAngelesTemperatureLabel.setText(formattedTemperature);
+                    losAngelesProgressBar.setProgress(progress);
                 }
-                else if (city.equals("New York") && newYorkCityTemperatureLabel != null)
+                else if (city.equals("New York"))
                 {
                     newYorkCityTemperatureLabel.setText(formattedTemperature);
+                    newYorkCityProgressBar.setProgress(progress);
+                }
+
+                for (XYChart.Data<String, Number> data : chartDataSeries.getData())
+                {
+                    if (data.getXValue().equals(city))
+                    {
+                        data.setYValue(temperature);
+                        break;
+                    }
                 }
             }
             statusLabel.setText("Weather updated successfully.");
