@@ -119,20 +119,17 @@ public class ProgrammaticWeatherView extends BorderPane
 
         try
         {
-            List<TargetLocation> locations = List.of(
-                    TargetLocation.NEW_YORK,
-                    TargetLocation.LOS_ANGELES,
-                    TargetLocation.CHICAGO
-            );
+            List<WeatherReading> weatherReadings = weatherService.getCurrentWeather();
 
-            for (TargetLocation location : locations)
+            for (WeatherReading reading : weatherReadings)
             {
-                WeatherReading weatherReading = weatherService.getCurrentWeather(location);
-                CityUICard card = cityUICards.get(location.city());
+                // Get the city name from the reading and find the matching UI card
+                CityUICard card = cityUICards.get(reading.location().city());
 
-                if (card != null && weatherReading != null)
+                if (card != null)
                 {
-                    card.updateTemperature(weatherReading.temperatureF());
+                    // Update the card's temperature
+                    card.updateTemperature(reading.temperatureF());
                 }
             }
 
@@ -142,6 +139,11 @@ public class ProgrammaticWeatherView extends BorderPane
         {
             statusLabel.setText("Error fetching weather data.");
             showErrorAlert(e.getMessage());
+        }
+        catch (Exception e)
+        {
+            statusLabel.setText("Unexpected error occurred.");
+            showErrorAlert("An unexpected error occurred: " + e.getMessage());
         }
     }
 

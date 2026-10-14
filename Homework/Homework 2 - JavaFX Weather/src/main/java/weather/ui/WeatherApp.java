@@ -1,17 +1,20 @@
 package weather.ui;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
+import weather.controller.WeatherController;
 import weather.service.WeatherService;
-import weather.ui.ProgrammaticWeatherView;
+import java.net.URL;
 
 import java.net.URL;
 
 public class WeatherApp extends Application
 {
     @Override
-    public void start(Stage mainStage)
+    public void start(Stage mainStage) throws Exception
     {
         WeatherService weatherService = new WeatherService();
 

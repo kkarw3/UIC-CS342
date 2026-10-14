@@ -25,7 +25,7 @@ public class WeatherController
     @FXML private ComboBox<String> citySelector;
     @FXML private Label statusLabel;
 
-    private final WeatherService weatherService;
+    private WeatherService weatherService;
 
     @FXML
     private void initialize()
@@ -46,11 +46,6 @@ public class WeatherController
     @FXML
     private void handleRefresh()
     {
-        // TODO:
-        // 1. Call weatherService.getCurrentWeather().
-        // 2. Update ALL FXML controls and visualizations.
-        // 3. Show a meaningful user-visible error on failure.
-
         if (weatherService == null) { return; }
 
         try
@@ -62,11 +57,17 @@ public class WeatherController
                 String city = reading.location().city();
                 String formattedTemperature = String.format("%.1f °F", reading.temperatureF());
 
-                switch (city)
+                if (city.equals("Chicago") && chicagoTemperatureLabel != null)
                 {
-                    case "Chicago" -> chicagoTemperatureLabel.setText(formattedTemperature);
-                    case "Los Angeles" -> losAngelesTemperatureLabel.setText(formattedTemperature);
-                    case "New York" -> newYorkCityTemperatureLabel.setText(formattedTemperature);
+                    chicagoTemperatureLabel.setText(formattedTemperature);
+                }
+                else if (city.equals("Los Angeles") && losAngelesTemperatureLabel != null)
+                {
+                    losAngelesTemperatureLabel.setText(formattedTemperature);
+                }
+                else if (city.equals("New York") && newYorkCityTemperatureLabel != null)
+                {
+                    newYorkCityTemperatureLabel.setText(formattedTemperature);
                 }
             }
             statusLabel.setText("Weather updated successfully.");
@@ -75,6 +76,11 @@ public class WeatherController
         {
             statusLabel.setText("Error fetching weather data.");
             showErrorAlert(e.getMessage());
+        }
+        catch (Exception e)
+        {
+            statusLabel.setText("Unexpected error occurred.");
+            showErrorAlert("An unexpected error occurred: " + e.getMessage());
         }
     }
 
@@ -103,6 +109,7 @@ public class WeatherController
         }
     }
 
+    // Handles errors
     private void  showErrorAlert(String message)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);

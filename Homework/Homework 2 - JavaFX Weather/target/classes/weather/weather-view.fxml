@@ -28,19 +28,19 @@
 
     <center>
         <VBox alignment="TOP_CENTER" spacing="10">
-            <HBox fx:id="chicagoCard" styleClass="city-card">
+            <HBox fx:id="chicagoUICard" styleClass="city-card">
                 <Label text="Chicago" styleClass="city-name"/>
-                <Label fx:id="chicagoTempLabel" text="-- °F" styleClass="city-temp"/>
+                <Label fx:id="chicagoTemperatureLabel" text="-- °F" styleClass="city-temp"/>
             </HBox>
 
-            <HBox fx:id="laCard" styleClass="city-card">
+            <HBox fx:id="losAngelesUICard" styleClass="city-card">
                 <Label text="Los Angeles" styleClass="city-name"/>
-                <Label fx:id="laTempLabel" text="-- °F" styleClass="city-temp"/>
+                <Label fx:id="losAngelesTemperatureLabel" text="-- °F" styleClass="city-temp"/>
             </HBox>
 
-            <HBox fx:id="nyCard" styleClass="city-card">
+            <HBox fx:id="newYorkCityUICard" styleClass="city-card">
                 <Label text="New York" styleClass="city-name"/>
-                <Label fx:id="nyTempLabel" text="-- °F" styleClass="city-temp"/>
+                <Label fx:id="newYorkCityTemperatureLabel" text="-- °F" styleClass="city-temp"/>
             </HBox>
         </VBox>
     </center>
