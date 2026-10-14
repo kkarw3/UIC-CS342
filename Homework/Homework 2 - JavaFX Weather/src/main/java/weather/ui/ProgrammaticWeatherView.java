@@ -1,48 +1,168 @@
 package weather.ui;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert;
+import weather.model.TargetLocation;
+import weather.model.WeatherReading;
 import weather.service.WeatherService;
 
-/**
- * TODO: Complete the programmatic version of the assignment here.
- * Do NOT use FXML in this class.
- */
-public class ProgrammaticWeatherView extends BorderPane {
-    private final WeatherService weatherService = new WeatherService();
 
-    public ProgrammaticWeatherView(Runnable goHome) {
-        Label title = new Label("Programmatic Weather View");
-        title.getStyleClass().add("title");
+public class ProgrammaticWeatherView extends BorderPane
+{
+    private final WeatherService weatherService;
+    private final Map<String, CityUICard> cityUICards = new HashMap<>();
+    private final ComboBox<String> citySelector = new ComboBox<>();
+    private final Label statusLabel = new Label("Status: Ready");
 
-        Label instructions = new Label(
-                "TODO: Build the required dashboard using JavaFX controls created in Java."
-        );
-        instructions.setWrapText(true);
+    public ProgrammaticWeatherView(WeatherService weatherService)
+    {
+        this.weatherService = weatherService;
+        initializeUI();
+        refreshData();
+    }
+
+    // Sets up the UI for "The Weather Channel"
+    private void initializeUI()
+    {
+        Label titleLabel = new Label("The Weather Channel");
+        titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
         Button refreshButton = new Button("Refresh Weather");
-        refreshButton.getStyleClass().add("refresh-button");
+        refreshButton.setOnAction(e -> refreshData());
 
-        // TODO: Lambda event handler requirement.
-        refreshButton.setOnAction(event -> {
-            // 1. Call weatherService.getCurrentWeather().
-            // 2. Update labels AND graphical representations.
-            // 3. Display a user-visible error if retrieval fails.
-        });
+        HBox topBar = new HBox(15, titleLabel, refreshButton);
+        topBar.setAlignment(Pos.CENTER_LEFT);
+        topBar.setPadding(new Insets(0, 0, 15, 0));
+        setTop(topBar);
 
-        Button backButton = new Button("Back");
-        backButton.setOnAction(event -> goHome.run());
+        VBox cardsContainer = new VBox(10);
+        cardsContainer.setAlignment(Pos.TOP_CENTER);
 
-        HBox actions = new HBox(10, refreshButton, backButton);
-        VBox starterContent = new VBox(15, title, instructions, actions);
-        starterContent.getStyleClass().add("content-panel");
-        setCenter(starterContent);
+        List<String> cities = List.of("New York", "Los Angeles", "Chicago");
+        for (String city : cities)
+        {
+            CityUICard card = new CityUICard(city);
+            cityUICards.put(city, card);
+            cardsContainer.getChildren().add(card);
+        }
+        setCenter(cardsContainer);
 
-        // TODO: Add city controls/selection.
-        // TODO: Add at least two graphical representations.
-        // Hint: BarChart<String, Number>, ProgressBar, or javafx.scene.shape classes.
+        citySelector.getItems().addAll(cities);
+        citySelector.setPromptText("Select City to Highlight");
+        citySelector.setOnAction(e -> handleCitySelection());
+
+        HBox bottomBar = new HBox(15, new Label("Current city:"), citySelector, statusLabel);
+        bottomBar.setAlignment(Pos.CENTER_LEFT);
+        bottomBar.setPadding(new Insets(15, 0, 0, 0));
+        setBottom(bottomBar);
+    }
+
+    // This class is used for everything relating to the UI elements for cities
+    private static class CityUICard extends HBox
+    {
+        private final Label nameLabel;
+        private final Label temperatureLabel;
+
+        // The actual UI element for each city
+        public CityUICard(String cityName)
+        {
+            super(20);
+            setPadding(new Insets(12));
+            setAlignment(Pos.CENTER_LEFT);
+
+            nameLabel = new Label(cityName);
+            nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+
+            temperatureLabel = new Label("-- °F");
+            temperatureLabel.setStyle("-fx-font-size: 14px;");
+
+            getChildren().addAll(nameLabel, temperatureLabel);
+            setHighlighted(false);
+        }
+
+        // Updates the temperature of the current city
+        public void updateTemperature(double temp)
+        {
+            temperatureLabel.setText(String.format("%.1f °F", temp));
+        }
+
+        // Highlights the current city in the UI
+        public void setHighlighted(boolean highlighted)
+        {
+            if (highlighted)
+            {
+                setStyle("-fx-background-color: #e0f7fa; -fx-border-color: #00796b; " + "-fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px;");
+            }
+            else
+            {
+                setStyle("-fx-background-color: #f5f5f5; -fx-border-color: #cccccc; " + "-fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px;");
+            }
+        }
+    }
+
+    // Helper function - Handles the code for the refresh button
+    // Also gets data from the weatherService component
+    public void refreshData()
+    {
+        statusLabel.setText("Retrieving Weather...");
+
+        try
+        {
+            List<TargetLocation> locations = List.of(
+                    TargetLocation.NEW_YORK,
+                    TargetLocation.LOS_ANGELES,
+                    TargetLocation.CHICAGO
+            );
+
+            for (TargetLocation location : locations)
+            {
+                WeatherReading weatherReading = weatherService.getCurrentWeather(location);
+                CityUICard card = cityUICards.get(location.city());
+
+                if (card != null && weatherReading != null)
+                {
+                    card.updateTemperature(weatherReading.temperatureF());
+                }
+            }
+
+            statusLabel.setText("Weather updated successfully.");
+        }
+        catch (WeatherService.WeatherRetrievalException e)
+        {
+            statusLabel.setText("Error fetching weather data.");
+            showErrorAlert(e.getMessage());
+        }
+    }
+
+    // Helper function - Just highlights the city the user picked
+    public void handleCitySelection()
+    {
+        String selectedCity = citySelector.getValue();
+        for (Map.Entry<String, CityUICard> entry : cityUICards.entrySet())
+        {
+            boolean cityIsSelected = entry.getKey().equals(selectedCity);
+            entry.getValue().setHighlighted(cityIsSelected);
+        }
+    }
+
+    // Helper function - Error displayer
+    private void showErrorAlert(String message)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Weather Retrieval Error");
+        alert.setHeaderText("Unable to Fetch Weather Data");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

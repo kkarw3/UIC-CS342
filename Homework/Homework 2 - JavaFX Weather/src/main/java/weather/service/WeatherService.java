@@ -71,7 +71,7 @@ public class WeatherService {
         throw new IllegalArgumentException("temperature_2m was not found in the API response");
     }
 
-    private static class WeatherRetrievalException extends RuntimeException {
+    public static class WeatherRetrievalException extends RuntimeException {
         WeatherRetrievalException(String city, Throwable cause) {
             super("Could not retrieve weather for " + city + ": " + cause.getMessage(), cause);
         }
