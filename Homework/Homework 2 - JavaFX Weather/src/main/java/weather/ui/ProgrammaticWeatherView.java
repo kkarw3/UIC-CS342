@@ -95,7 +95,7 @@ public class ProgrammaticWeatherView extends BorderPane
     }
 
     // This class is used for everything relating to the UI elements for cities
-    private static class CityUICard extends HBox
+    private static class CityUICard extends VBox
     {
         private final Label nameLabel;
         private final Label temperatureLabel;
@@ -117,8 +117,8 @@ public class ProgrammaticWeatherView extends BorderPane
             temperatureGauge = new ProgressBar(0.0);
             temperatureGauge.setPrefWidth(200);
 
-            HBox textData = new HBox(15, nameLabel, temperatureLabel, temperatureLabel);
-            getChildren().addAll(nameLabel, temperatureLabel);
+            HBox textData = new HBox(15, nameLabel, temperatureLabel);
+            getChildren().addAll(textData, temperatureGauge);
             setHighlighted(false);
         }
 
