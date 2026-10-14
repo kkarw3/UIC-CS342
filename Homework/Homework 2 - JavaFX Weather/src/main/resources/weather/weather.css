@@ -1,27 +1,55 @@
-.root {
-    -fx-font-family: "Arial";
+#main-pane
+{
+    -fx-background-color: #ffffff;
+}
+
+.title-label
+{
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.action-button
+{
+    -fx-background-color: #e0e0e0;
+    -fx-cursor: hand;
+}
+
+.action-button:hover
+{
+    -fx-background-color: #d0d0d0;
+}
+
+.city-card
+{
+    -fx-padding: 12px;
+    -fx-spacing: 20px;
+    -fx-alignment: center-left;
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.city-card:hover
+{
+    -fx-border-color: #999999;
+}
+
+.highlighted-card
+{
+    -fx-background-color: #e0f7fa;
+    -fx-border-color: #00796b;
+    -fx-border-width: 2px;
+}
+
+.city-name
+{
+    -fx-font-weight: bold;
     -fx-font-size: 14px;
 }
 
-.title {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
+.city-temp
+{
+    -fx-font-size: 14px;
 }
-
-.home-panel,
-.content-panel,
-.header-panel,
-.button-bar {
-    -fx-padding: 20px;
-}
-
-.refresh-button {
-    -fx-font-weight: bold;
-}
-
-.status-label {
-    -fx-padding: 8px;
-}
-
-/* TODO: Students should expand the stylesheet.
-   Possible classes: .city-card, .cold, .mild, .warm, .hot */
