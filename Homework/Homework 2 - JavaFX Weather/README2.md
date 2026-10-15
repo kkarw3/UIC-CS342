@@ -1,6 +1,9 @@
 Krrish Karwal
+
 NetID: kkarw3
+
 UIN: 676475701
+
 Homework 2 README Reflection Questions
 
 1. What code is different between constructing the interface programmatically and defining it with FXML?
