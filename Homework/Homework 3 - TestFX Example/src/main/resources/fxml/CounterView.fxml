@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="edu.uic.cs342.CounterController"
+      spacing="12" alignment="CENTER" style="-fx-padding: 24;">
+  <Label fx:id="countLabel" text="0" style="-fx-font-size: 26px;"/>
+  <Button fx:id="incrementButton" text="Increment" onAction="#increment"/>
+  <Button fx:id="resetButton" text="Reset" onAction="#reset"/>
+</VBox>
