@@ -5,5 +5,6 @@
       spacing="12" alignment="CENTER" style="-fx-padding: 24;">
   <Label fx:id="countLabel" text="0" style="-fx-font-size: 26px;"/>
   <Button fx:id="incrementButton" text="Increment" onAction="#increment"/>
-  <Button fx:id="resetButton" text="Reset" onAction="#reset"/>
+  <Button fx:id="decrementButton" text="Decrement" onAction="#decrement" disable="true"/>
+  <Button fx:id="resetButton" text="Reset" onAction="#reset" disable="true"/>
 </VBox>

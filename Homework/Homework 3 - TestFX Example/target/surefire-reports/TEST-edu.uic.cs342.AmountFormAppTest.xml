@@ -1,72 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="edu.uic.cs342.AmountFormAppTest" time="3.329" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="edu.uic.cs342.AmountFormAppTest" time="3.352" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="javafx.runtime.version" value="25.0.4+2"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/markhallenbeck/Desktop/CS342_Fall26/codeSamples/CS342_TestFX_Maven_Example/target/test-classes:/Users/markhallenbeck/Desktop/CS342_Fall26/codeSamples/CS342_TestFX_Maven_Example/target/classes:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-controls/25.0.4/javafx-controls-25.0.4.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-controls/25.0.4/javafx-controls-25.0.4-mac-aarch64.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-graphics/25.0.4/javafx-graphics-25.0.4.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-graphics/25.0.4/javafx-graphics-25.0.4-mac-aarch64.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-base/25.0.4/javafx-base-25.0.4.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-base/25.0.4/javafx-base-25.0.4-mac-aarch64.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-fxml/25.0.4/javafx-fxml-25.0.4.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-fxml/25.0.4/javafx-fxml-25.0.4-mac-aarch64.jar:/Users/markhallenbeck/.m2/repository/org/junit/jupiter/junit-jupiter/5.12.2/junit-jupiter-5.12.2.jar:/Users/markhallenbeck/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.12.2/junit-jupiter-api-5.12.2.jar:/Users/markhallenbeck/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/markhallenbeck/.m2/repository/org/junit/platform/junit-platform-commons/1.12.2/junit-platform-commons-1.12.2.jar:/Users/markhallenbeck/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/markhallenbeck/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.12.2/junit-jupiter-params-5.12.2.jar:/Users/markhallenbeck/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.12.2/junit-jupiter-engine-5.12.2.jar:/Users/markhallenbeck/.m2/repository/org/junit/platform/junit-platform-engine/1.12.2/junit-platform-engine-1.12.2.jar:/Users/markhallenbeck/.m2/repository/org/testfx/testfx-junit5/4.0.18/testfx-junit5-4.0.18.jar:/Users/markhallenbeck/.m2/repository/org/testfx/testfx-core/4.0.18/testfx-core-4.0.18.jar:/Users/markhallenbeck/.m2/repository/org/osgi/org.osgi.core/6.0.0/org.osgi.core-6.0.0.jar:/Users/markhallenbeck/.m2/repository/org/hamcrest/hamcrest/2.1/hamcrest-2.1.jar:/Users/markhallenbeck/.m2/repository/org/assertj/assertj-core/3.13.2/assertj-core-3.13.2.jar:"/>
-    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.class.path" value="/Users/krrish/IntelliJ/UIC-CS342/Homework/Homework 3 - TestFX Example/target/test-classes:/Users/krrish/IntelliJ/UIC-CS342/Homework/Homework 3 - TestFX Example/target/classes:/Users/krrish/.m2/repository/org/openjfx/javafx-controls/25.0.4/javafx-controls-25.0.4.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-controls/25.0.4/javafx-controls-25.0.4-mac-aarch64.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-graphics/25.0.4/javafx-graphics-25.0.4.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-graphics/25.0.4/javafx-graphics-25.0.4-mac-aarch64.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-base/25.0.4/javafx-base-25.0.4.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-base/25.0.4/javafx-base-25.0.4-mac-aarch64.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-fxml/25.0.4/javafx-fxml-25.0.4.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-fxml/25.0.4/javafx-fxml-25.0.4-mac-aarch64.jar:/Users/krrish/.m2/repository/org/junit/jupiter/junit-jupiter/5.12.2/junit-jupiter-5.12.2.jar:/Users/krrish/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.12.2/junit-jupiter-api-5.12.2.jar:/Users/krrish/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/krrish/.m2/repository/org/junit/platform/junit-platform-commons/1.12.2/junit-platform-commons-1.12.2.jar:/Users/krrish/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/krrish/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.12.2/junit-jupiter-params-5.12.2.jar:/Users/krrish/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.12.2/junit-jupiter-engine-5.12.2.jar:/Users/krrish/.m2/repository/org/junit/platform/junit-platform-engine/1.12.2/junit-platform-engine-1.12.2.jar:/Users/krrish/.m2/repository/org/testfx/testfx-junit5/4.0.18/testfx-junit5-4.0.18.jar:/Users/krrish/.m2/repository/org/testfx/testfx-core/4.0.18/testfx-core-4.0.18.jar:/Users/krrish/.m2/repository/org/osgi/org.osgi.core/6.0.0/org.osgi.core-6.0.0.jar:/Users/krrish/.m2/repository/org/hamcrest/hamcrest/2.1/hamcrest-2.1.jar:/Users/krrish/.m2/repository/org/assertj/assertj-core/3.13.2/assertj-core-3.13.2.jar:"/>
+    <property name="java.vm.vendor" value="Microsoft"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="java.vendor.url" value="https://www.microsoft.com"/>
     <property name="user.timezone" value="America/Chicago"/>
     <property name="javafx.version" value="25.0.4"/>
     <property name="os.name" value="Mac OS X"/>
     <property name="java.vm.specification.version" value="25"/>
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-25.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/markhallenbeck/Desktop/CS342_Fall26/codeSamples/CS342_TestFX_Maven_Example/target/surefire/surefirebooter-20261102104812882_3.jar /Users/markhallenbeck/Desktop/CS342_Fall26/codeSamples/CS342_TestFX_Maven_Example/target/surefire 2026-11-02T10-48-12_841-jvmRun1 surefire-20261102104812882_1tmp surefire_0-20261102104812882_2tmp"/>
+    <property name="sun.boot.library.path" value="/Users/krrish/Library/Java/JavaVirtualMachines/ms-25.0.5.0.2/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/krrish/IntelliJ/UIC-CS342/Homework/Homework 3 - TestFX Example/target/surefire/surefirebooter-20261107205838061_3.jar /Users/krrish/IntelliJ/UIC-CS342/Homework/Homework 3 - TestFX Example/target/surefire 2026-11-07T20-58-38_021-jvmRun1 surefire-20261107205838061_1tmp surefire_0-20261107205838061_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/Users/markhallenbeck/Desktop/CS342_Fall26/codeSamples/CS342_TestFX_Maven_Example/target/test-classes:/Users/markhallenbeck/Desktop/CS342_Fall26/codeSamples/CS342_TestFX_Maven_Example/target/classes:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-controls/25.0.4/javafx-controls-25.0.4.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-controls/25.0.4/javafx-controls-25.0.4-mac-aarch64.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-graphics/25.0.4/javafx-graphics-25.0.4.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-graphics/25.0.4/javafx-graphics-25.0.4-mac-aarch64.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-base/25.0.4/javafx-base-25.0.4.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-base/25.0.4/javafx-base-25.0.4-mac-aarch64.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-fxml/25.0.4/javafx-fxml-25.0.4.jar:/Users/markhallenbeck/.m2/repository/org/openjfx/javafx-fxml/25.0.4/javafx-fxml-25.0.4-mac-aarch64.jar:/Users/markhallenbeck/.m2/repository/org/junit/jupiter/junit-jupiter/5.12.2/junit-jupiter-5.12.2.jar:/Users/markhallenbeck/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.12.2/junit-jupiter-api-5.12.2.jar:/Users/markhallenbeck/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/markhallenbeck/.m2/repository/org/junit/platform/junit-platform-commons/1.12.2/junit-platform-commons-1.12.2.jar:/Users/markhallenbeck/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/markhallenbeck/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.12.2/junit-jupiter-params-5.12.2.jar:/Users/markhallenbeck/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.12.2/junit-jupiter-engine-5.12.2.jar:/Users/markhallenbeck/.m2/repository/org/junit/platform/junit-platform-engine/1.12.2/junit-platform-engine-1.12.2.jar:/Users/markhallenbeck/.m2/repository/org/testfx/testfx-junit5/4.0.18/testfx-junit5-4.0.18.jar:/Users/markhallenbeck/.m2/repository/org/testfx/testfx-core/4.0.18/testfx-core-4.0.18.jar:/Users/markhallenbeck/.m2/repository/org/osgi/org.osgi.core/6.0.0/org.osgi.core-6.0.0.jar:/Users/markhallenbeck/.m2/repository/org/hamcrest/hamcrest/2.1/hamcrest-2.1.jar:/Users/markhallenbeck/.m2/repository/org/assertj/assertj-core/3.13.2/assertj-core-3.13.2.jar:"/>
+    <property name="surefire.test.class.path" value="/Users/krrish/IntelliJ/UIC-CS342/Homework/Homework 3 - TestFX Example/target/test-classes:/Users/krrish/IntelliJ/UIC-CS342/Homework/Homework 3 - TestFX Example/target/classes:/Users/krrish/.m2/repository/org/openjfx/javafx-controls/25.0.4/javafx-controls-25.0.4.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-controls/25.0.4/javafx-controls-25.0.4-mac-aarch64.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-graphics/25.0.4/javafx-graphics-25.0.4.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-graphics/25.0.4/javafx-graphics-25.0.4-mac-aarch64.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-base/25.0.4/javafx-base-25.0.4.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-base/25.0.4/javafx-base-25.0.4-mac-aarch64.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-fxml/25.0.4/javafx-fxml-25.0.4.jar:/Users/krrish/.m2/repository/org/openjfx/javafx-fxml/25.0.4/javafx-fxml-25.0.4-mac-aarch64.jar:/Users/krrish/.m2/repository/org/junit/jupiter/junit-jupiter/5.12.2/junit-jupiter-5.12.2.jar:/Users/krrish/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.12.2/junit-jupiter-api-5.12.2.jar:/Users/krrish/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/krrish/.m2/repository/org/junit/platform/junit-platform-commons/1.12.2/junit-platform-commons-1.12.2.jar:/Users/krrish/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/krrish/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.12.2/junit-jupiter-params-5.12.2.jar:/Users/krrish/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.12.2/junit-jupiter-engine-5.12.2.jar:/Users/krrish/.m2/repository/org/junit/platform/junit-platform-engine/1.12.2/junit-platform-engine-1.12.2.jar:/Users/krrish/.m2/repository/org/testfx/testfx-junit5/4.0.18/testfx-junit5-4.0.18.jar:/Users/krrish/.m2/repository/org/testfx/testfx-core/4.0.18/testfx-core-4.0.18.jar:/Users/krrish/.m2/repository/org/osgi/org.osgi.core/6.0.0/org.osgi.core-6.0.0.jar:/Users/krrish/.m2/repository/org/hamcrest/hamcrest/2.1/hamcrest-2.1.jar:/Users/krrish/.m2/repository/org/assertj/assertj-core/3.13.2/assertj-core-3.13.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="/Users/markhallenbeck"/>
+    <property name="user.home" value="/Users/krrish"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.version.date" value="2026-08-18"/>
-    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk-25.jdk/Contents/Home"/>
+    <property name="java.version.date" value="2026-10-22"/>
+    <property name="java.home" value="/Users/krrish/Library/Java/JavaVirtualMachines/ms-25.0.5.0.2/Contents/Home"/>
     <property name="file.separator" value="/"/>
-    <property name="basedir" value="/Users/markhallenbeck/Desktop/CS342_Fall26/codeSamples/CS342_TestFX_Maven_Example"/>
+    <property name="basedir" value="/Users/krrish/IntelliJ/UIC-CS342/Homework/Homework 3 - TestFX Example"/>
     <property name="style.color" value="always"/>
-    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="java.vm.compressedOopsMode" value="Non-zero disjoint base"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="testfx.robot" value="glass"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/markhallenbeck/Desktop/CS342_Fall26/codeSamples/CS342_TestFX_Maven_Example/target/surefire/surefirebooter-20261102104812882_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/krrish/IntelliJ/UIC-CS342/Homework/Homework 3 - TestFX Example/target/surefire/surefirebooter-20261107205838061_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="java.runtime.version" value="25.0.4.1+1-LTS-5"/>
-    <property name="user.name" value="markhallenbeck"/>
+    <property name="java.runtime.version" value="25.0.5.0.2+1-LTS"/>
+    <property name="user.name" value="krrish"/>
     <property name="stdout.encoding" value="UTF-8"/>
     <property name="path.separator" value=":"/>
-    <property name="os.version" value="26.6.2"/>
-    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="os.version" value="27.2"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
-    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Microsoft-15804671"/>
     <property name="maven.ext.class.path" value="/Applications/IntelliJ IDEA.app/Contents/plugins/maven-plugin/lib/intellij.maven.rt/maven-event-listener.jar"/>
-    <property name="localRepository" value="/Users/markhallenbeck/.m2/repository"/>
-    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
-    <property name="java.io.tmpdir" value="/var/folders/_2/8l9dtsl91tbbxmw4h5y0ktr00000gn/T/"/>
-    <property name="idea.version" value="2026.2.1"/>
-    <property name="java.version" value="25.0.4.1"/>
-    <property name="user.dir" value="/Users/markhallenbeck/Desktop/CS342_Fall26/codeSamples/CS342_TestFX_Maven_Example"/>
+    <property name="localRepository" value="/Users/krrish/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/microsoft/openjdk/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/56/wd_s2fc95hb81d2_ypvt4t8c0000gn/T/"/>
+    <property name="idea.version" value="2026.3"/>
+    <property name="java.version" value="25.0.5.0.2"/>
+    <property name="user.dir" value="/Users/krrish/IntelliJ/UIC-CS342/Homework/Homework 3 - TestFX Example"/>
     <property name="os.arch" value="aarch64"/>
     <property name="jansi.passthrough" value="true"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="native.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/Users/markhallenbeck/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.library.path" value="/Users/krrish/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="stderr.encoding" value="UTF-8"/>
-    <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="java.vm.version" value="25.0.4.1+1-LTS-5"/>
+    <property name="java.vendor" value="Microsoft"/>
+    <property name="java.vm.version" value="25.0.5.0.2+1-LTS"/>
     <property name="stdin.encoding" value="UTF-8"/>
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
-    <property name="maven.repo.local" value="/Users/markhallenbeck/.m2/repository"/>
+    <property name="maven.repo.local" value="/Users/krrish/.m2/repository"/>
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="validInputShowsConfirmation" classname="edu.uic.cs342.AmountFormAppTest" time="1.27"/>
-  <testcase name="invalidInputShowsFeedback" classname="edu.uic.cs342.AmountFormAppTest" time="2.056"/>
+  <testcase name="validInputShowsConfirmation" classname="edu.uic.cs342.AmountFormAppTest" time="1.294"/>
+  <testcase name="invalidInputShowsFeedback" classname="edu.uic.cs342.AmountFormAppTest" time="2.057"/>
 </testsuite>
