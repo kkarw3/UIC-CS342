@@ -74,51 +74,51 @@ public class ThreeCardLogicTest
         assertEquals(0, ThreeCardLogic.evaluateHand(hand));
     }
 
-    // ----- evaluatePlayerWinnings Tests (9 - 14) -----
+    // ----- evaluatePairPlusWinnings Tests (9 - 14) -----
 
     @Test
     void testEvalWinningsStraightFlush()
     {
         ArrayList<Card> hand = makeHand(new Card('C', 9), new Card('C', 10), new Card('C', 11));
-        assertEquals(400, ThreeCardLogic.evaluatePlayerWinnings(hand, 10));
+        assertEquals(400, ThreeCardLogic.evaluatePairPlusWinnings(hand, 10));
     }
 
     @Test
     void testEvalWinningsThreeOfAKind()
     {
         ArrayList<Card> hand = makeHand(new Card('H', 14), new Card('S', 14), new Card('D', 14));
-        assertEquals(300, ThreeCardLogic.evaluatePlayerWinnings(hand, 10));
+        assertEquals(300, ThreeCardLogic.evaluatePairPlusWinnings(hand, 10));
     }
 
     @Test
     void testEvalWinningsStraight()
     {
         ArrayList<Card> hand = makeHand(new Card('H', 8), new Card('S', 9), new Card('D', 10));
-        assertEquals(60, ThreeCardLogic.evaluatePlayerWinnings(hand, 10));
+        assertEquals(60, ThreeCardLogic.evaluatePairPlusWinnings(hand, 10));
     }
 
     @Test
     void testEvalWinningsFlush()
     {
         ArrayList<Card> hand = makeHand(new Card('S', 4), new Card('S', 7), new Card('S', 12));
-        assertEquals(30, ThreeCardLogic.evaluatePlayerWinnings(hand, 10));
+        assertEquals(30, ThreeCardLogic.evaluatePairPlusWinnings(hand, 10));
     }
 
     @Test
     void testEvalWinningsPair()
     {
         ArrayList<Card> hand = makeHand(new Card('C', 5), new Card('D', 5), new Card('H', 9));
-        assertEquals(10, ThreeCardLogic.evaluatePlayerWinnings(hand, 10));
+        assertEquals(10, ThreeCardLogic.evaluatePairPlusWinnings(hand, 10));
     }
 
     @Test
     void testEvalWinningsHighCardAndZeroBet()
     {
         ArrayList<Card> highCard = makeHand(new Card('C', 3), new Card('D', 7), new Card('H', 13));
-        assertEquals(0, ThreeCardLogic.evaluatePlayerWinnings(highCard, 15));
+        assertEquals(0, ThreeCardLogic.evaluatePairPlusWinnings(highCard, 15));
 
         ArrayList<Card> pair = makeHand(new Card('C', 5), new Card('D', 5), new Card('H', 9));
-        assertEquals(0, ThreeCardLogic.evaluatePlayerWinnings(pair, 0));
+        assertEquals(0, ThreeCardLogic.evaluatePairPlusWinnings(pair, 0));
     }
 
     // ----- compareHands Tests (15 - 22) -----

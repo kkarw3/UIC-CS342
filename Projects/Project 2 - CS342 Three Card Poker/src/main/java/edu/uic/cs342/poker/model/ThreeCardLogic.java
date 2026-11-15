@@ -1,7 +1,6 @@
 package edu.uic.cs342.poker.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class ThreeCardLogic
@@ -54,7 +53,7 @@ public class ThreeCardLogic
         return 0; // High Card
     }
 
-    public static int evaluatePlayerWinnings(ArrayList<Card> hand, int bet)
+    public static int evaluatePairPlusWinnings(ArrayList<Card> hand, int bet)
     {
         if (bet <= 0) { return 0; } // Invalid bet
 
