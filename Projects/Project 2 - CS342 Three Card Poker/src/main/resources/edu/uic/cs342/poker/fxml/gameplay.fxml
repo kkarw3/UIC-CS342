@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.uic.cs342.poker.controller.GameplayController">
+
+    <top>
+        <VBox spacing="8">
+            <HBox styleClass="header-bar" alignment="CENTER_LEFT" spacing="14">
+                <Label fx:id="roundLabel" text="Round 1" styleClass="section-title"/>
+                <Label fx:id="phaseLabel" text="Phase: BETTING" styleClass="subtitle-label"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Switch Theme" styleClass="secondary-button" onAction="#handleToggleTheme"/>
+                <Button text="Main Menu" styleClass="secondary-button" onAction="#handleBackToMenu"/>
+            </HBox>
+
+            <VBox alignment="CENTER" spacing="6">
+                <padding>
+                    <Insets top="6" right="20" bottom="0" left="20"/>
+                </padding>
+                <Label fx:id="guidanceLabel" text="Place Ante ($5-$25) and optional Pair Plus ($5-$25) for both players, then click Deal Cards."
+                       styleClass="status-banner" maxWidth="Infinity" alignment="CENTER"/>
+                <Label fx:id="errorLabel" text="" styleClass="error-label" visible="false" managed="false"/>
+            </VBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="16" alignment="CENTER">
+            <padding>
+                <Insets top="12" right="20" bottom="12" left="20"/>
+            </padding>
+
+            <VBox styleClass="panel-box" alignment="CENTER" spacing="8" maxWidth="480">
+                <Label text="DEALER (Qualifies with Queen-High or Better)" styleClass="section-title"/>
+                <HBox fx:id="dealerCardsBox" alignment="CENTER" spacing="14">
+                    <Label text="?" styleClass="card-back"/>
+                    <Label text="?" styleClass="card-back"/>
+                    <Label text="?" styleClass="card-back"/>
+                </HBox>
+                <Label fx:id="dealerHandStatusLabel" text="Cards Hidden Until Both Players Decide" styleClass="subtitle-label"/>
+            </VBox>
+
+            <HBox spacing="20" alignment="CENTER" VBox.vgrow="ALWAYS">
+                <VBox styleClass="panel-box" spacing="10" alignment="CENTER" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER" spacing="12">
+                        <Label text="PLAYER 1" styleClass="section-title"/>
+                        <Label fx:id="p1WinningsLabel" text="Total Winnings: $0" styleClass="subtitle-label"/>
+                    </HBox>
+
+                    <HBox fx:id="p1CardsBox" alignment="CENTER" spacing="12">
+                        <Label text="?" styleClass="card-back"/>
+                        <Label text="?" styleClass="card-back"/>
+                        <Label text="?" styleClass="card-back"/>
+                    </HBox>
+                    <Label fx:id="p1HandRankLabel" text="Hand: Waiting for Deal"/>
+
+                    <GridPane hgap="10" vgap="8" alignment="CENTER">
+                        <Label text="Ante ($5-$25):" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="p1AnteField" promptText="e.g. 10" prefWidth="90" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Pair Plus ($0 or $5-$25):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="p1PairPlusField" promptText="0" prefWidth="90" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    </GridPane>
+
+                    <Label fx:id="p1ActiveWagersLabel" text="Active Wagers — Ante: $0 | Pair Plus: $0 | Play: $0"/>
+
+                    <HBox spacing="12" alignment="CENTER">
+                        <Button fx:id="p1PlayButton" text="Play (Match Ante)" onAction="#handleP1Play"/>
+                        <Button fx:id="p1FoldButton" text="Fold" styleClass="fold-button" onAction="#handleP1Fold"/>
+                    </HBox>
+                    <Label fx:id="p1DecisionStatusLabel" text="Status: Waiting for Bets"/>
+                </VBox>
+
+                <VBox styleClass="panel-box" spacing="10" alignment="CENTER" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER" spacing="12">
+                        <Label text="PLAYER 2" styleClass="section-title"/>
+                        <Label fx:id="p2WinningsLabel" text="Total Winnings: $0" styleClass="subtitle-label"/>
+                    </HBox>
+
+                    <HBox fx:id="p2CardsBox" alignment="CENTER" spacing="12">
+                        <Label text="?" styleClass="card-back"/>
+                        <Label text="?" styleClass="card-back"/>
+                        <Label text="?" styleClass="card-back"/>
+                    </HBox>
+                    <Label fx:id="p2HandRankLabel" text="Hand: Waiting for Deal"/>
+
+                    <GridPane hgap="10" vgap="8" alignment="CENTER">
+                        <Label text="Ante ($5-$25):" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="p2AnteField" promptText="e.g. 10" prefWidth="90" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Pair Plus ($0 or $5-$25):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="p2PairPlusField" promptText="0" prefWidth="90" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    </GridPane>
+
+                    <Label fx:id="p2ActiveWagersLabel" text="Active Wagers — Ante: $0 | Pair Plus: $0 | Play: $0"/>
+
+                    <HBox spacing="12" alignment="CENTER">
+                        <Button fx:id="p2PlayButton" text="Play (Match Ante)" onAction="#handleP2Play"/>
+                        <Button fx:id="p2FoldButton" text="Fold" styleClass="fold-button" onAction="#handleP2Fold"/>
+                    </HBox>
+                    <Label fx:id="p2DecisionStatusLabel" text="Status: Waiting for Bets"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox styleClass="header-bar" alignment="CENTER" spacing="20">
+            <Button fx:id="dealButton" text="Place Bets &amp; Deal Cards" onAction="#handleDealCards"/>
+            <Button fx:id="viewResultsButton" text="View Round Results →" onAction="#handleViewResults"/>
+        </HBox>
+    </bottom>
+</BorderPane>

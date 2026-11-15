@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.uic.cs342.poker.controller.ResultsController">
+
+    <top>
+        <HBox styleClass="header-bar" alignment="CENTER_LEFT" spacing="14">
+            <Label fx:id="resultsTitleLabel" text="Round 1 — Results Summary" styleClass="title-label"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Switch Theme" styleClass="secondary-button" onAction="#handleToggleTheme"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="18" alignment="CENTER">
+            <padding>
+                <Insets top="18" right="24" bottom="18" left="24"/>
+            </padding>
+
+            <VBox styleClass="panel-box" alignment="CENTER" spacing="8" maxWidth="540">
+                <Label text="DEALER FINAL HAND" styleClass="section-title"/>
+                <HBox fx:id="dealerCardsBox" alignment="CENTER" spacing="14"/>
+                <Label fx:id="dealerClassificationLabel" text="Classification: Queen High"/>
+                <Label fx:id="dealerQualifyLabel" text="Status: Dealer Qualifies" styleClass="status-banner"/>
+            </VBox>
+
+            <HBox spacing="22" alignment="CENTER" VBox.vgrow="ALWAYS">
+
+                <VBox fx:id="p1SummaryPanel" styleClass="panel-box" spacing="10" alignment="CENTER" HBox.hgrow="ALWAYS">
+                    <Label text="PLAYER 1 OUTCOME" styleClass="section-title"/>
+                    <HBox fx:id="p1CardsBox" alignment="CENTER" spacing="12"/>
+                    <Label fx:id="p1ClassificationLabel" text="Hand: Pair"/>
+                    <Label fx:id="p1WagerBreakdownLabel" text="Wagers — Ante: $10 | Pair Plus: $5 | Play: $10"/>
+                    <Label fx:id="p1OutcomeLabel" text="Beat Dealer! Won +$20" wrapText="true" textAlignment="CENTER" styleClass="status-banner"/>
+                    <Label fx:id="p1NetChangeLabel" text="Round Net Change: +$25" styleClass="section-title"/>
+                    <Label fx:id="p1CumulativeLabel" text="Updated Cumulative Winnings: $25"/>
+                </VBox>
+
+                <VBox fx:id="p2SummaryPanel" styleClass="panel-box" spacing="10" alignment="CENTER" HBox.hgrow="ALWAYS">
+                    <Label text="PLAYER 2 OUTCOME" styleClass="section-title"/>
+                    <HBox fx:id="p2CardsBox" alignment="CENTER" spacing="12"/>
+                    <Label fx:id="p2ClassificationLabel" text="Hand: High Card"/>
+                    <Label fx:id="p2WagerBreakdownLabel" text="Wagers — Ante: $10 | Pair Plus: $0 | Play: $0"/>
+                    <Label fx:id="p2OutcomeLabel" text="Folded — Forfeited $10" wrapText="true" textAlignment="CENTER" styleClass="status-banner"/>
+                    <Label fx:id="p2NetChangeLabel" text="Round Net Change: -$10" styleClass="section-title"/>
+                    <Label fx:id="p2CumulativeLabel" text="Updated Cumulative Winnings: -$10"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox styleClass="header-bar" alignment="CENTER" spacing="22">
+            <Button fx:id="nextRoundButton" text="Play Another Round" onAction="#handleNextRound"/>
+            <Button fx:id="mainMenuButton" text="Return to Main Menu" styleClass="secondary-button" onAction="#handleReturnToMenu"/>
+        </HBox>
+    </bottom>
+</BorderPane>

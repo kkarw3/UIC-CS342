@@ -10,4 +10,5 @@ module edu.uic.cs342.poker
     exports edu.uic.cs342.poker.controller;
     exports edu.uic.cs342.poker.model;
     exports edu.uic.cs342.poker.service;
+    opens edu.uic.cs342.poker.service to javafx.fxml;
 }
